@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Search from "./components/Search";
+import Line from "./components/Line";
+import Footer from "./components/Footer";
+
+import { useState } from "react";
+
+import emojis from "../src/assets/json/emojis.json";
 
 function App() {
+  const [search, setSearch] = useState("");
+  const handleSearchChange = (event) => {
+    const value = event.target.value;
+    setSearch(value);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Search search={search} handleSearchChange={handleSearchChange} />
+      {emojis.map((item, index) => {
+        return (
+          <Line
+            key={index}
+            symbol={item.symbol}
+            title={item.title}
+            keywords={item.keywords}
+            search={search}
+          />
+        );
+      })}
+      <Footer />
     </div>
   );
 }
