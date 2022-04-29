@@ -9,6 +9,7 @@ import emojis from "../src/assets/json/emojis.json";
 
 function App() {
   const [search, setSearch] = useState("");
+
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearch(value);
